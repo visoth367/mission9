@@ -19,7 +19,7 @@ class ContactUsController extends Controller
         ]);
 
         $contact = ContactMessage::create([
-            'user_id' => Auth::id(),
+            // 'user_id' => Auth::id(),
             'username' => $request->username,
             'email' => $request->email,
             'phone_number' => $request->phone_number,

@@ -14,7 +14,7 @@ class ContactMessage extends Model
         'username',
         'email',
         'phone_number',
-        'message',
+        'message'
     ];
     public function user()
     {
