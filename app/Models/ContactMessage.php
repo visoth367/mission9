@@ -10,7 +10,7 @@ class ContactMessage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        // 'user_id',
         'username',
         'email',
         'phone_number',
