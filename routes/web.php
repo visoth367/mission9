@@ -48,12 +48,12 @@ Route::get('/dashboard', function () {
 
 //http://127.0.0.1:8000/about-us
 Route::get('/about-us', function () {
-    return view('front.about-us');
+    return view('Front.about-us');
 });
 
 //http://127.0.0.1:8000/contact-us
 Route::get('/contact-us', function () {
-    return view('front.contact-us');
+    return view('Front.contact-us');
 });
 
 //http://127.0.0.1:8000/courses
@@ -73,7 +73,7 @@ Route::get('/contact-us', function () {
 
 //http://127.0.0.1:8000/home
 Route::get('/home', function () {
-    return view('front.home');
+    return view('Front.home');
 });
 
 // login & Sign_up
