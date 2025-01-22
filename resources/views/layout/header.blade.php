@@ -6,7 +6,7 @@
             </a>
             <nav>
                 <ul>
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ url('/courses') }}">Courses</a></li>
                     <li><a href="{{ url('/about-us') }}">About</a></li>
                     <li><a href="{{ url('/contact-us') }}">Contact</a></li>

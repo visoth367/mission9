@@ -174,7 +174,7 @@
                     <button type="submit">Sign In</button>
                 </form>
                 <div class="social-signin">
-                    <label for="remember-me">Don't have Account <a href="http://127.0.0.1:8000/Sign_up" class="create-account">Create Account</a></label>
+                    <label for="remember-me">Don't have Account <a href="{{ url('/Sign_up') }}" class="create-account">Create Account</a></label>
                     <p>Or sign in with:</p>
                     <div class="social-buttons">
                         <button class="google">Google</button>

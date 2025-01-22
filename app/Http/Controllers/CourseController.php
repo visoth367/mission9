@@ -124,7 +124,7 @@ class CourseController extends Controller
     {
         $courses = Course::all();
 
-        return view('front.courses', compact('courses'));
+        return view('Front.courses', compact('courses'));
     }
 
     // Method to handle purchasing a course
