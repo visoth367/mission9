@@ -71,40 +71,33 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-logo">
-                <h1 class="logo">
-                    <img src="Image/Logo.png" alt="logo">
-                </h1>
-            </div>
-            <div class="footer-links">
-                <div>
-                    <h4>Top Category</h4>
-                    <ul>
-                        <li><a href="#" class="text-white">Design</a></li>
-                        <li><a href="#" class="text-white">Development</a></li>
-                        <li><a href="#" class="text-white">Marketing</a></li>
-                        <li><a href="#" class="text-white">Business</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#" class="text-white">About</a></li>
-                        <li><a href="#" class="text-white">Contact</a></li>
-                        <li><a href="#" class="text-white">Support</a></li>
-                        <li><a href="#" class="text-white">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-app">
-                <h4>Download Our App</h4>
-                <button class="btn btn-primary">App Store</button>
-                <button class="btn btn-primary">Google Play</button>
-            </div>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section footer-logo">
+            <h1>Educator</h1>
+            <p>Digital Success Starts Here</p>
         </div>
-    </footer>
+        <div class="footer-section footer-links">
+            <h4>Top Categories</h4>
+            <ul>
+                <li><a href="#">Design</a></li>
+                <li><a href="#">Development</a></li>
+                <li><a href="#">Marketing</a></li>
+                <li><a href="#">Business</a></li>
+            </ul>
+        </div>
+        <div class="footer-section footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
 </body>
 
 </html>

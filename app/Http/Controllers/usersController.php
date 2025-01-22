@@ -9,13 +9,14 @@ use App\Models\PurchasedCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage; // Add this line
 
 class UsersController extends Controller
 {
     // Show sign-up form
     public function create()
     {
-        return view('front.Sign_up');
+        return view('Front.Sign_up');
     }
 
     // Store new user in database
@@ -43,7 +44,7 @@ class UsersController extends Controller
     // Show login form
     public function showLoginForm()
     {
-        return view('front.Sign_in');
+        return view('Front.Sign_in');
     }
 
     // Handle login
@@ -74,16 +75,16 @@ class UsersController extends Controller
 
     // Show user profile
     public function showProfile()
-{
-    if (Auth::check()) {
-        $user = Auth::user();
-        // Fetch courses associated with the authenticated user
-        $courses = $user->courses; // This assumes the relationship is defined correctly in User model
-        return view('front.profile', compact('user', 'courses'));
-    } else {
-        return redirect('/login')->with('error', 'Please log in to view your profile.');
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            // Fetch courses associated with the authenticated user
+            $courses = $user->courses; // This assumes the relationship is defined correctly in User model
+            return view('Front.profile', compact('user', 'courses'));
+        } else {
+            return redirect('/login')->with('error', 'Please log in to view your profile.');
+        }
     }
-}
 
     // Update user profile
     public function updateProfile(Request $request)
@@ -152,7 +153,4 @@ class UsersController extends Controller
         $messages = ContactMessage::all();
         return view('admin.message', compact('messages'));
     }
-
-    // Handle course purchase
 }
-

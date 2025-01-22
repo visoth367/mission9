@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('Front.Home');
+    return view('Front.home');
 });
 
 //http://127.0.0.1:8000/login
@@ -73,7 +73,7 @@ Route::get('/contact-us', function () {
 
 //http://127.0.0.1:8000/home
 Route::get('/home', function () {
-    return view('front.Home');
+    return view('front.home');
 });
 
 // login & Sign_up
@@ -88,6 +88,7 @@ Route::post('/logout', [usersController::class, 'logout'])->name('logout');
 // profile
 Route::get('/profile', [UsersController::class, 'showProfile'])->name('profile.show');
 Route::post('/profile/update', [UsersController::class, 'updateProfile'])->name('profile.update');
+
 
 
 //contact us
@@ -130,28 +131,4 @@ Route::get('/purchased-courses', [CourseController::class, 'purchasedCourses'])-
 Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
 
 
-//admin
-// Public routes
-Route::get('/admin/register', [AdminController::class, 'showRegistrationForm'])->name('admin.registerForm');
-Route::post('/admin/register', [AdminController::class, 'register'])->name('admin.register.post');
-Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.post');
-Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
-// Admin-only routes
-Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-
-    Route::get('/admin/messages', [AdminController::class, 'showMessages'])->name('admin.messages');
-    Route::get('/admin/profile', [AdminController::class, 'showProfile'])->name('admin.profile');
-    Route::post('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
-
-    // User management routes
-    Route::get('/admin/user', [AdminController::class, 'show'])->name('admin.users');
-    Route::get('/admin/user/{id}/edit', [AdminController::class, 'edit'])->name('user.edit');
-    Route::put('/admin/user/{id}', [AdminController::class, 'update'])->name('user.update');
-    Route::delete('/admin/user/{id}', [AdminController::class, 'destroy'])->name('user.destroy');
-    Route::get('/admin/courses', [AdminController::class, 'showCourses'])->name('admin.courses');
-});

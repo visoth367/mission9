@@ -225,29 +225,53 @@ main {
     margin: 10px;
 }
 
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 40px 0;
+.footer {
+    background-color: #f8f8f8;
+    /* Light background color */
+    color: #333;
+    padding: 20px 0;
+    /* Reduced padding */
+    text-align: left;
+    border-top: 1px solid #e7e7e7;
 }
 
-.footer-logo {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.footer-links {
+.footer-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.footer-links div {
+.footer-section {
     flex: 1;
+    margin-right: 20px;
+    /* Space between sections */
+}
+
+.footer-logo h1 {
+    font-size: 20px;
+    /* Slightly smaller font size */
+    margin-bottom: 5px;
+    /* Reduced margin */
+    color: #333;
+}
+
+.footer-logo p {
+    margin: 0;
+    font-size: 12px;
+    /* Slightly smaller font size */
+    color: #666;
 }
 
 .footer-links h4 {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    /* Slightly smaller font size */
+    margin-bottom: 5px;
+    /* Reduced margin */
+    color: #333;
 }
 
 .footer-links ul {
@@ -257,26 +281,17 @@ footer {
 }
 
 .footer-links ul li {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    /* Reduced margin */
 }
 
 .footer-links ul li a {
-    color: #fff;
     text-decoration: none;
+    color: #666;
+    transition: color 0.3s ease;
 }
 
-.footer-app {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.footer-app .btn {
-    background-color: #fff;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-weight: 500;
+.footer-links ul li a:hover {
+    color: #ff5722;
+    /* Accent color */
 }

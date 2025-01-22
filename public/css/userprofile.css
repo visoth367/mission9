@@ -1,64 +1,14 @@
-.home-section {
-    padding: 20px;
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    transition: margin-left 0.3s;
 }
+
 .container {
-    max-width: 80%;
-    margin: 0 auto;
-}
-.container-item
-{
-    display: flex;
-    margin-top: 50px;
-}
-.profile-image
-{
-    width : 35%;
-}
-.profile-wrapper {
-    display: flex;
-    align-items: center;
-}
-.profile-image {
-    flex: 1;
-    max-width: 200px;
-    margin-right: 20px;
-}
-.profile-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-}
-.card {
-    margin-left: 50px;
-    width:35%;
-    flex: 2;
-}
-.card-body {
-    padding: 20px;
-}
-.card-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-.card-text {
-    margin-bottom: 10px;
-}
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-}
-.btn-primary {
-    background-color: #007bff;
-}
-.btn-primary:hover {
-    background-color: #0056b3;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
 }
 
 .custom-table {
@@ -71,9 +21,76 @@
 }
 
 .custom-table tr:nth-child(even) {
-    background-color: rgb(112, 112, 112);
+    background-color: lightgray;
 }
 
 .custom-table td {
     padding: 10px;
+}
+
+.course-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.course-item img {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+.profile-image img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 18px;
+}
+
+.btn-primary,
+.btn-secondary {
+    margin-right: 10px;
+}
+
+.sidebar-closed .main-content {
+    margin-left: 78px;
+}
+
+.main-content {
+    margin-left: 250px;
+    transition: margin-left 0.3s;
+}
+
+.toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #ff6600;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.toggle-btn:hover {
+    background-color: #cc5200;
 }
