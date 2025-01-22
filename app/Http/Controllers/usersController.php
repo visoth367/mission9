@@ -119,7 +119,7 @@ class UsersController extends Controller
     // Show contact form
     public function showContactForm()
     {
-        return view('contact');
+        return view('Front.contact');
     }
 
     // Handle contact form submission

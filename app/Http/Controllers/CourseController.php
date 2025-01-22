@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\PurchasedCourse;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -12,24 +13,20 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail($id);
-
-        // Example: Return view with course details
-        return view('front.course_details', compact('course'));
+        return view('Front.course_details', compact('course'));
     }
 
     // Method to handle video content display
     public function videoContent($course_id)
     {
         $course = Course::findOrFail($course_id);
-
-        // Example: Return view with video content or related details
-        return view('front.video_content', compact('course'));
+        return view('Front.video_content', compact('course'));
     }
 
     // Method to display form for creating a new course
     public function create()
     {
-        return view('front.uploadPage');
+        return view('Front.uploadPage');
     }
 
     // Method to store a newly created course
@@ -59,10 +56,9 @@ class CourseController extends Controller
             'image_url' => '/storage/' . $imagePath,
             'video_url' => '/storage/' . $videoPath,
             'rating' => 0,
-            'user_id' => auth()->user()->id, // Associate the course with the authenticated user
+            'user_id' => auth()->user()->id,
         ]);
 
-        // Redirect back with success message
         return redirect()->back()->with('success', 'Course created successfully!');
     }
 
@@ -70,7 +66,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        return view('front.edit_course', compact('course'));
+        return view('Front.edit_course', compact('course'));
     }
 
     // Method to update an existing course
@@ -89,12 +85,14 @@ class CourseController extends Controller
 
         // Handle image update if new image is provided
         if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($course->image_url);
             $imagePath = $request->file('image')->store('uploads/images', 'public');
             $course->image_url = '/storage/' . $imagePath;
         }
 
         // Handle video update if new video is provided
         if ($request->hasFile('video')) {
+            Storage::disk('public')->delete($course->video_url);
             $videoPath = $request->file('video')->store('uploads/videos', 'public');
             $course->video_url = '/storage/' . $videoPath;
         }
@@ -106,7 +104,6 @@ class CourseController extends Controller
         $course->price = $request->price;
         $course->save();
 
-        // Redirect to course details page with success message
         return redirect()->route('courses.show', $course->id)->with('success', 'Course updated successfully!');
     }
 
@@ -114,6 +111,11 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
+
+        // Delete associated files
+        Storage::disk('public')->delete($course->image_url);
+        Storage::disk('public')->delete($course->video_url);
+
         $course->delete();
 
         return redirect()->route('profile.show')->with('success', 'Course deleted successfully!');
@@ -122,8 +124,7 @@ class CourseController extends Controller
     // Method to list all courses
     public function index()
     {
-        $courses = Course::all();
-
+        $courses = Course::paginate(10); // Paginate courses
         return view('Front.courses', compact('courses'));
     }
 
@@ -132,50 +133,36 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($id);
 
-        // Check if the authenticated user is the owner of the course
+        // Prevent purchasing own course
         if ($course->user_id === auth()->user()->id) {
-            return redirect()->route('profile.show', $course->id)->with('error', 'You cannot purchase your own course!');
+            return redirect()->route('courses.show', $course->id)->with('error', 'You cannot purchase your own course!');
         }
 
-        // Check if the course has already been purchased by the user
+        // Prevent duplicate purchases
         $alreadyPurchased = PurchasedCourse::where('course_id', $course->id)
-                                            ->where('user_id', auth()->user()->id)
-                                            ->exists();
+            ->where('user_id', auth()->user()->id)
+            ->exists();
 
         if ($alreadyPurchased) {
             return redirect()->route('courses.show', $course->id)->with('error', 'You have already purchased this course!');
         }
 
-        // Here you can implement a specific check for video courses
-        // For example, check if the video URL is already purchased
-        $alreadyPurchasedVideo = PurchasedCourse::whereHas('course', function ($query) use ($course) {
-                                        $query->where('video_url', $course->video_url);
-                                    })
-                                    ->where('user_id', auth()->user()->id)
-                                    ->exists();
-
-        if ($alreadyPurchasedVideo) {
-            return redirect()->route('profile.show', $course->id)->with('error', 'You have already purchased this video course!');
-        }
-
-        // Create a record in the PurchasedCourse table
         PurchasedCourse::create([
             'course_id' => $course->id,
             'user_id' => auth()->user()->id,
         ]);
 
-        // Redirect the user to the purchased course page
-        return redirect()->route('profile.show', $course->id)->with('success', 'Course purchased successfully!');
+        return redirect()->route('courses.show', $course->id)->with('success', 'Course purchased successfully!');
     }
 
     // Method to display purchased courses for the authenticated user
     public function purchasedCourses()
     {
         $purchasedCourses = PurchasedCourse::where('user_id', auth()->user()->id)
-                                            ->with('course')
-                                            ->get();
+            ->with('course')
+            ->paginate(10);
 
-        return view('front.purchased_course', compact('purchasedCourses'));
+        return view('Front.purchased_course', compact('purchasedCourses'));
     }
 
     // Method to display courses purchased by the authenticated user
@@ -185,21 +172,6 @@ class CourseController extends Controller
             $query->where('user_id', auth()->user()->id);
         })->get();
 
-        return view('front.purchased-course', compact('courses'));
-    }
-
-    // Method to purchase a course
-    public function purchase($id)
-    {
-        $course = Course::findOrFail($id);
-
-        // Create a record in the PurchasedCourse table
-        PurchasedCourse::create([
-            'course_id' => $course->id,
-            'user_id' => auth()->user()->id,
-        ]);
-
-        // Redirect the user to the purchased course page
-        return redirect()->route('courses.show', $course->id)->with('success', 'Course purchased successfully!');
+        return view('Front.purchased_course', compact('courses'));
     }
 }
