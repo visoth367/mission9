@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
+URL::forceScheme('https');
+
 Route::get('/', function () {
     return view('Front.home');
 });
