@@ -124,7 +124,7 @@ class CourseController extends Controller
     // Method to list all courses
     public function index()
     {
-        $courses = Course::paginate(10); // Paginate courses
+        $courses = Course::paginate(0); // Paginate courses
         return view('Front.courses', compact('courses'));
     }
 
